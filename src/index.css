@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  background-color: #000000;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -13,6 +14,116 @@ code {
 }
 
 .header {
-  padding: 25px;
+  padding: 12px 220px;
+  display: flex;
+  max-height: 3rem;
+  justify-content: space-between;
+  /* align-items: center; */
+  background-color: #303030;
+  opacity: 0.8;
+}
+
+.title {
+  font-size: 20px;
+  color: #e50914;
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  align-self: center;
+  /* background-color: bisque; */
+}
+
+.nav-links {
+  color: white;
+  display: inline-flex;
+  align-content: end;
+}
+
+.nav-link {
+  color: white;
+  padding: 0px 16px;
+  margin: 0px 10px;
+  text-decoration: none;
+  align-self: center;
+  /* background-color: bisque; */
+  font-family: "Montserrat", sans-serif;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.homepage {
+  flex: 1;
+}
+
+.hero {
+  background-image: url("../assets/images/dune-part-two.jpg"); /* Replace 'hero-image.jpg' with your actual image path */
+  background-size: cover;
+  background-position: center;
+  height: 80vh; /* Adjust as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff; /* Text color */
+  text-align: center;
+}
+
+/* .hero-content {
+  max-width: 600px;
+  padding: 20px;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+} */
+
+.hero-banner {
+  position: relative;
+  width: 100%;
+  height: 800px; /* Adjust height as needed */
+  overflow: hidden;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  text-align: center;
+}
+
+/* .opacity-layer {
+  width: 100%;
+  height: 250px;
+  background: linear-gradient(180deg, rgba(4, 21, 45, 0) 0%, #04152d 79.17%);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+} */
+
+.box {
+  height: 200px;
   background-color: aqua;
+}
+
+.footer {
+  flex-shrink: 0;
+  background: green;
+  height: 200px;
 }
