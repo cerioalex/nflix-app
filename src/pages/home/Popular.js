@@ -1,0 +1,45 @@
+import "../../App.css";
+import React from "react";
+import { useMovieContext } from "../../context/MovieContext";
+import MovieBlock from "../../components/MovieBlock";
+import Typography from "@mui/material/Typography";
+import Scroll from "../../components/Scroll";
+
+const Popular = () => {
+  const { popularMoviesData, popularLoading, popularError } = useMovieContext();
+
+  if (popularLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (popularError) {
+    return <div>Error: {popularError.message}</div>;
+  }
+
+  if (!popularMoviesData) {
+    return <div>No data available</div>;
+  }
+
+  console.log(popularMoviesData.results);
+
+  return (
+    <>
+      <div className="container">
+        <Typography
+          variant="h4"
+          gutterBottom
+          sx={{ fontWeight: "bold", color: "#fff" }}
+        >
+          Popular
+        </Typography>
+        <Scroll>
+          {popularMoviesData.results.map((movie) => (
+            <MovieBlock key={movie.id} movie={movie} />
+          ))}
+        </Scroll>
+      </div>
+    </>
+  );
+};
+
+export default Popular;
