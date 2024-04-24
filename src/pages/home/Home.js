@@ -1,33 +1,18 @@
 import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import HeroBanner from "./HeroBanner";
+import Popular from "./Popular";
+import TopRated from "./TopRated";
+import Upcoming from "./Upcoming";
 
 const Home = () => {
-  const movies = [1, 2, 3, 4, 5];
   return (
     <div className="homepage">
       <Outlet />
       <HeroBanner />
-
-      <p>Home Page</p>
-
-      {movies.map((movie) => (
-        <NavLink key={movie} to={`/${movie}`}>
-          Movie {movie}
-        </NavLink>
-      ))}
-      <div className="box">
-        <p>awefef</p>
-      </div>
-      <div className="box">
-        <p>awefef</p>
-      </div>
-      <div className="box">
-        <p>awefef</p>
-      </div>
-      <div className="box">
-        <p>awefef</p>
-      </div>
+      <Popular />
+      <TopRated />
+      <Upcoming />
     </div>
   );
 };

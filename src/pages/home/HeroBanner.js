@@ -22,9 +22,3 @@ const HeroBanner = () => {
 };
 
 export default HeroBanner;
-// <div className="hero">
-//   <div class="hero-content">
-//     <h1>Welcome to Our Website</h1>
-//     <p>Discover amazing content and services tailored just for you.</p>
-//   </div>
-// </div>

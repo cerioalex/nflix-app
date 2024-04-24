@@ -3,7 +3,6 @@ import React from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
-  Routes,
   Route,
   RouterProvider,
 } from "react-router-dom";
