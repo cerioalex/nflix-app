@@ -5,7 +5,7 @@ const HeroBanner = () => {
     <>
       <div className="hero-banner">
         <img
-          src="https://www.pluggedin.com/wp-content/uploads/2024/02/dune-part-two.jpg" // Replace with your image URL
+          src="https://www.pluggedin.com/wp-content/uploads/2024/02/dune-part-two.jpg"
           alt="Hero Banner"
           className="hero-image"
         />
@@ -16,7 +16,6 @@ const HeroBanner = () => {
           </p>
         </div>
       </div>
-      <div className="opacity-layer"></div>
     </>
   );
 };

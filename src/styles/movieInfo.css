@@ -1,0 +1,71 @@
+.info-row {
+  margin: 20px 0px;
+  display: flex;
+  /* background-color: aliceblue; */
+}
+
+.info-col-1 > img {
+  border-radius: 10px;
+}
+
+.info-col-2 {
+  padding: 12px 30px;
+}
+
+.info-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0px;
+  color: #fff;
+}
+
+.info-tagline {
+  margin: 6px 0px;
+  color: grey;
+  font-size: 16px;
+}
+
+.info-genres {
+  /* list-style-type: none; */
+  display: flex;
+  margin-top: -8px;
+  margin-bottom: 15px;
+}
+
+.genre-list {
+  background-color: #e50914;
+  padding: 4px 12px;
+  margin-right: 6px;
+  text-align: center;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.info-average {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%; /* This makes the div circular */
+  background-color: #333; /* Change color as needed */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white; /* Color of the number */
+  font-size: 24px; /* Size of the number */
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.info-overview {
+  color: #fff;
+}
+
+.info-overview > p {
+  margin-top: 5px;
+  line-height: 30px;
+}
+
+.info-row-2 {
+  display: flex;
+  justify-content: space-between;
+}

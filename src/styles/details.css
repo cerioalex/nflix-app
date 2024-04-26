@@ -1,0 +1,9 @@
+.details-container {
+  /* background-color: antiquewhite; */
+  min-height: 120vh;
+  /* padding: 20px 220px; */
+  padding-top: 30px;
+  padding-bottom: 10px;
+  padding-left: 220px;
+  padding-right: 220px;
+}

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { getMoviesData } from "../utils/api";
 import { apiConfig } from "../api/apiConfig";
 
 const useFetch = (url, params) => {
