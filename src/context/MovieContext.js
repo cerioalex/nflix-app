@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { apiConfig } from "../api/apiConfig";
 import useFetch from "../hooks/useFetch";
 
@@ -7,6 +7,8 @@ export const MovieContext = createContext(null);
 export const useMovieContext = () => useContext(MovieContext);
 
 export const MovieContextProvider = ({ children }) => {
+  const [mediaType, setMediaType] = useState("movie");
+
   const {
     data: popularMoviesData,
     loading: popularLoading,
@@ -35,6 +37,8 @@ export const MovieContextProvider = ({ children }) => {
     upcomingMoviesData,
     upcomingMoviesLoading,
     upcomingMoviesError,
+    mediaType,
+    setMediaType,
   };
 
   return (

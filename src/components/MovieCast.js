@@ -5,9 +5,6 @@ import { apiConfig } from "../api/apiConfig";
 import Scroll from "./Scroll";
 
 const MovieCast = ({ casts }) => {
-  console.log("cast");
-  console.log(casts);
-
   return (
     <div className="cast-container">
       <Typography variant="h5" gutterBottom>

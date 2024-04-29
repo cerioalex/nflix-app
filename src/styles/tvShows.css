@@ -1,0 +1,14 @@
+.tvShow-wrapper {
+  padding: 30px 220px;
+}
+
+.tvShow-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+}
+
+.tvShow-list {
+  margin-bottom: 30px;
+  width: 250px;
+  text-align: center;
+}

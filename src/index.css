@@ -36,16 +36,22 @@ code {
 .nav-links {
   color: white;
   display: inline-flex;
-  align-content: end;
+  align-self: center;
+  list-style-type: none;
 }
 
-.nav-link {
-  color: white;
+.nav-item {
   padding: 0px 16px;
   margin: 0px 10px;
-  text-decoration: none;
-  align-self: center;
+  height: 60px;
+  align-content: center;
   font-family: "Montserrat", sans-serif;
+  transition: color 0.3s;
+}
+
+.nav-item:hover {
+  cursor: pointer;
+  color: #e50914;
 }
 
 .wrapper {
@@ -99,6 +105,10 @@ code {
 
 .row-centered {
   text-align: center;
+}
+
+.footer-btn {
+  background-color: #e50914;
 }
 
 .footer p {
@@ -172,6 +182,8 @@ code {
   margin-top: 4px;
   font-weight: bold;
   color: #fff;
+  width: 250px;
+  text-align: left;
 }
 
 .movie-block-date {

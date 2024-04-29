@@ -4,16 +4,35 @@ import { apiConfig } from "../api/apiConfig";
 import { formatDate } from "../utils/date";
 import { Link } from "react-router-dom";
 
-const MovieBlock = ({ movie }) => {
+const MovieBlock = ({ mediaType, movie }) => {
+  console.log("Movie Block");
+  console.log(mediaType);
+  const getTitle = (movie) => {
+    if (movie.hasOwnProperty("original_title")) {
+      return movie.original_title;
+    } else {
+      return movie.original_name;
+    }
+  };
+
   return (
     <>
-      <Link to={`/${movie.id}`} className="link">
+      <Link to={`/${mediaType}/${movie.id}`} className="link">
+        {/* <Link
+        to={{
+          pathname: `/${mediaType}/${movie.id}`,
+          state: { mediaType: mediaType },
+        }}
+        className="link"
+      ></Link> */}
+
         <div className="image-with-text">
           {movie.poster_path ? (
             <img
               src={apiConfig.imgW500(movie.poster_path)}
               alt=""
               width={250}
+              height={350}
             />
           ) : (
             <img
@@ -23,8 +42,10 @@ const MovieBlock = ({ movie }) => {
               height={250}
             />
           )}
-          <p className="movie-block-title">{movie.title}</p>
-          <p className="movie-block-date">{formatDate(movie.release_date)}</p>
+          <p className="movie-block-title">{getTitle(movie)}</p>
+          <p className="movie-block-date">
+            {movie.release_date ? formatDate(movie.release_date) : null}
+          </p>
         </div>
       </Link>
     </>
