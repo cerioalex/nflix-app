@@ -6,18 +6,18 @@ import Typography from "@mui/material/Typography";
 import useFetch from "../hooks/useFetch";
 import { apiConfig } from "../api/apiConfig";
 
-const Recommendations = ({ id }) => {
+const Recommendations = ({ id, mediaType }) => {
   const {
     data: recommendationsMovieData,
     // loading: castLoading,
     // error: castError,
-  } = useFetch(`${apiConfig.BASE_URL}/movie/${id}/recommendations`);
+  } = useFetch(`${apiConfig.BASE_URL}/${mediaType}/${id}/recommendations`);
 
   const {
     data: imagesMovieData,
     // loading: castLoading,
     // error: castError,
-  } = useFetch(`${apiConfig.BASE_URL}/movie/${id}/images`);
+  } = useFetch(`${apiConfig.BASE_URL}/${mediaType}/${id}/images`);
 
   if (!recommendationsMovieData) {
     return <div>No data available....</div>;
@@ -35,7 +35,7 @@ const Recommendations = ({ id }) => {
         </Typography>
         <Scroll>
           {recommendationsMovieData.results.map((movie) => (
-            <MovieBlock key={movie.id} movie={movie} />
+            <MovieBlock key={movie.id} mediaType={mediaType} movie={movie} />
           ))}
         </Scroll>
       </div>

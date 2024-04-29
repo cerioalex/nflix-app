@@ -1,6 +1,6 @@
 import "../../styles/details.css";
 import React from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { apiConfig } from "../../api/apiConfig";
 import useFetch from "../../hooks/useFetch";
 import MovieInfo from "../../components/MovieInfo";
@@ -10,10 +10,8 @@ import Recommendations from "../../components/Recommendations";
 
 const Details = () => {
   const { mediaType, movieId } = useParams();
-  // const location = useLocation();
-  // const { mediaType } = location.state || {};
 
-  console.log("Details Page");
+  console.log("Details");
   console.log(mediaType);
 
   const {
@@ -49,8 +47,8 @@ const Details = () => {
       <div className="details-container">
         <MovieInfo movie={movieDetailsData} crew={castData.crew} />
         <MovieCast casts={castData.cast} />
-        <Similar id={movieId} />
-        <Recommendations id={movieId} />
+        <Similar id={movieId} mediaType={mediaType} />
+        <Recommendations id={movieId} mediaType={mediaType} />
       </div>
     </>
   );

@@ -32,7 +32,7 @@ const TopRated = () => {
         </Typography>
         <Scroll>
           {topRatedMoviesData.results.map((movie) => (
-            <MovieBlock key={movie.id} movie={movie} />
+            <MovieBlock key={movie.id} mediaType={"movie"} movie={movie} />
           ))}
         </Scroll>
       </div>

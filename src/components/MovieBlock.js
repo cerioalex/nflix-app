@@ -5,8 +5,6 @@ import { formatDate } from "../utils/date";
 import { Link } from "react-router-dom";
 
 const MovieBlock = ({ mediaType, movie }) => {
-  console.log("Movie Block");
-  console.log(mediaType);
   const getTitle = (movie) => {
     if (movie.hasOwnProperty("original_title")) {
       return movie.original_title;
@@ -18,14 +16,6 @@ const MovieBlock = ({ mediaType, movie }) => {
   return (
     <>
       <Link to={`/${mediaType}/${movie.id}`} className="link">
-        {/* <Link
-        to={{
-          pathname: `/${mediaType}/${movie.id}`,
-          state: { mediaType: mediaType },
-        }}
-        className="link"
-      ></Link> */}
-
         <div className="image-with-text">
           {movie.poster_path ? (
             <img
