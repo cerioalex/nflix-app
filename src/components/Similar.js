@@ -6,12 +6,15 @@ import Typography from "@mui/material/Typography";
 import useFetch from "../hooks/useFetch";
 import { apiConfig } from "../api/apiConfig";
 
-const Similar = ({ id }) => {
+const Similar = ({ id, mediaType }) => {
+  console.log("Similar");
+  console.log(mediaType);
+
   const {
     data: similarMoviesData,
     // loading: castLoading,
     // error: castError,
-  } = useFetch(`${apiConfig.BASE_URL}/movie/${id}/similar`);
+  } = useFetch(`${apiConfig.BASE_URL}/${mediaType}/${id}/similar`);
 
   if (!similarMoviesData) {
     return <div>No data available....</div>;
@@ -25,7 +28,7 @@ const Similar = ({ id }) => {
         </Typography>
         <Scroll>
           {similarMoviesData.results.map((movie) => (
-            <MovieBlock key={movie.id} movie={movie} />
+            <MovieBlock key={movie.id} mediaType={mediaType} movie={movie} />
           ))}
         </Scroll>
       </div>
