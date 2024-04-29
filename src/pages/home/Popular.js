@@ -20,8 +20,6 @@ const Popular = () => {
     return <div>No data available</div>;
   }
 
-  console.log(popularMoviesData.results);
-
   return (
     <>
       <div className="container">
@@ -34,7 +32,7 @@ const Popular = () => {
         </Typography>
         <Scroll>
           {popularMoviesData.results.map((movie) => (
-            <MovieBlock key={movie.id} movie={movie} />
+            <MovieBlock key={movie.id} mediaType={"movie"} movie={movie} />
           ))}
         </Scroll>
       </div>

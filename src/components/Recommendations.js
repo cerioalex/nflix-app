@@ -27,8 +27,6 @@ const Recommendations = ({ id }) => {
     return <div>No data available....</div>;
   }
 
-  console.log("images");
-  console.log(imagesMovieData);
   return (
     <div className="similar-container">
       <div>

@@ -1,6 +1,6 @@
 import "../../styles/details.css";
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { apiConfig } from "../../api/apiConfig";
 import useFetch from "../../hooks/useFetch";
 import MovieInfo from "../../components/MovieInfo";
@@ -9,19 +9,24 @@ import Similar from "../../components/Similar";
 import Recommendations from "../../components/Recommendations";
 
 const Details = () => {
-  const { movieId } = useParams();
+  const { mediaType, movieId } = useParams();
+  // const location = useLocation();
+  // const { mediaType } = location.state || {};
+
+  console.log("Details Page");
+  console.log(mediaType);
 
   const {
     data: movieDetailsData,
     loading: movieDetailsLoading,
     error: movieDetailsError,
-  } = useFetch(`${apiConfig.BASE_URL}/movie/${movieId}?language=en-US`);
+  } = useFetch(`${apiConfig.BASE_URL}/${mediaType}/${movieId}?language=en-US`);
 
   const {
     data: castData,
     // loading: castLoading,
     // error: castError,
-  } = useFetch(`${apiConfig.BASE_URL}/movie/${movieId}/credits`);
+  } = useFetch(`${apiConfig.BASE_URL}/${mediaType}/${movieId}/credits`);
 
   if (movieDetailsLoading) {
     return <div>Loading...</div>;
@@ -38,8 +43,6 @@ const Details = () => {
   if (!castData) {
     return <div>No CAST data available....</div>;
   }
-
-  console.log(movieDetailsData);
 
   return (
     <>
