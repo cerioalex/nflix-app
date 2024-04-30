@@ -3,6 +3,7 @@ import React from "react";
 import { apiConfig } from "../api/apiConfig";
 import { formatDate } from "../utils/date";
 import { Link } from "react-router-dom";
+import CircularRating from "./CircularRating";
 
 const MovieBlock = ({ mediaType, movie }) => {
   const getTitle = (movie) => {
@@ -32,6 +33,11 @@ const MovieBlock = ({ mediaType, movie }) => {
               height={250}
             />
           )}
+          <div className="rating-container">
+            <div className="circle-rating">
+              <CircularRating rating={movie.vote_average.toFixed(1)} />
+            </div>
+          </div>
           <p className="movie-block-title">{getTitle(movie)}</p>
           <p className="movie-block-date">
             {movie.release_date ? formatDate(movie.release_date) : null}
