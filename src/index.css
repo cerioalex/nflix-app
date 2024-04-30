@@ -153,7 +153,6 @@ code {
 }
 
 .image-with-text {
-  width: 50%;
   cursor: pointer;
 }
 
@@ -179,11 +178,12 @@ code {
 
 .movie-block-title {
   font-size: 18px;
-  margin-top: 4px;
+  margin-top: 26px;
   font-weight: bold;
   color: #fff;
   width: 250px;
   text-align: left;
+  padding: 8px 0px;
 }
 
 .movie-block-date {
@@ -213,4 +213,22 @@ code {
 
 .scroll-button:last-child {
   right: 0;
+}
+
+.rating-container {
+  position: relative;
+  font-weight: 700;
+  width: 50px;
+  margin-left: 4px;
+}
+
+.circle-rating {
+  position: absolute;
+  margin-top: -35px;
+}
+
+.circle {
+  background-color: #000;
+  border-radius: 50%;
+  padding: 4px;
 }

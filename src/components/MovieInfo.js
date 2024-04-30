@@ -4,6 +4,7 @@ import { apiConfig } from "../api/apiConfig";
 import { formatDate } from "../utils/date";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import CircularRating from "./CircularRating";
 
 const MovieInfo = ({ movie, crew }) => {
   const [genres, setGenres] = useState([]);
@@ -19,10 +20,6 @@ const MovieInfo = ({ movie, crew }) => {
   const getDirector = crew.find((c) => c.job === "Director");
 
   const getWriter = crew.find((c) => c.job === "Writer");
-
-  const convertToTenths = (number) => {
-    return Math.round(number * 10) / 10;
-  };
 
   const toHoursAndMinutes = (totalMinutes) => {
     const hours = Math.floor(totalMinutes / 60);
@@ -53,7 +50,7 @@ const MovieInfo = ({ movie, crew }) => {
             ))}
           </div>
           <div className="info-average">
-            <p>{convertToTenths(movie.vote_average)}</p>
+            <CircularRating rating={movie.vote_average.toFixed(1)} />
           </div>
           <div className="info-overview">
             <Typography variant="h6" gutterBottom>
