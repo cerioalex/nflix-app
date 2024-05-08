@@ -7,16 +7,18 @@ const Header = () => {
 
   const navigationHandler = (type) => {
     if (type === "movie") {
-      navigate("/");
+      navigate("/explore/movie");
     } else {
-      navigate("/tv-shows");
+      navigate("/explore/tv");
     }
   };
 
   return (
     <header className="header">
-      <div className="title">
-        <h1>Nflix</h1>
+      <div className="title-container">
+        <Link to={"/"} className="title-name">
+          Nflix
+        </Link>
       </div>
       <ul className="nav-links">
         <li className="nav-item" onClick={() => navigationHandler("movie")}>
@@ -25,12 +27,6 @@ const Header = () => {
         <li className="nav-item" onClick={() => navigationHandler("tv")}>
           TV Shows
         </li>
-        {/* <Link to="/" className="nav-link">
-          <h4>Home</h4>
-        </Link>
-        <Link to="/tv-shows" className="nav-link">
-          <h4>TV Shows</h4>
-        </Link> */}
       </ul>
     </header>
   );

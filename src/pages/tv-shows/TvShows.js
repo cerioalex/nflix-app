@@ -12,10 +12,6 @@ const TvShows = () => {
     // error: tvShowsError,
   } = useFetch(`${apiConfig.BASE_URL}/tv/popular`);
 
-  // const { data: tvShowsDetailData } = useFetch(
-  //   `${apiConfig.BASE_URL}/tv/{series_id}`
-  // );
-
   if (!tvShowsData) {
     return <div>No TV Shows Available</div>;
   }

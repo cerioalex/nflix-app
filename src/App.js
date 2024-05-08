@@ -10,6 +10,7 @@ import Home from "./pages/home/Home";
 import Layout from "./pages/layout/Layout";
 import Details from "./../src/pages/details/Details";
 import TvShows from "./pages/tv-shows/TvShows";
+import Explore from "./pages/explore/Explore";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,6 +18,7 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="/:mediaType/:movieId" element={<Details />} />
       <Route path="tv-shows" element={<TvShows />} />
+      <Route path="/explore/:mediaType" element={<Explore />} />
     </Route>
   )
 );
