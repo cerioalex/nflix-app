@@ -22,8 +22,8 @@ const MovieBlock = ({ mediaType, movie }) => {
             <img
               src={apiConfig.imgW500(movie.poster_path)}
               alt=""
-              width={250}
-              height={350}
+              width={230}
+              height={340}
             />
           ) : (
             <img

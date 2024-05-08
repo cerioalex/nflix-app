@@ -3,13 +3,18 @@ import { apiConfig } from "../api/apiConfig";
 
 const useFetch = (url, params) => {
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const timer = setTimeout(() => {
+          setLoading(true);
+        }, 5000);
+
         const queryParams = new URLSearchParams(params).toString();
+
         const response = await fetch(`${url}?${queryParams}`, {
           method: "GET",
           headers: {
@@ -18,6 +23,8 @@ const useFetch = (url, params) => {
           },
         });
 
+        clearTimeout(timer);
+
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
@@ -25,6 +32,7 @@ const useFetch = (url, params) => {
         const jsonData = await response.json();
         setData(jsonData);
         setLoading(false);
+        setError(null);
       } catch (error) {
         setError(error);
         setLoading(false);
@@ -34,24 +42,12 @@ const useFetch = (url, params) => {
     fetchData();
 
     // Cleanup function
-    return () => setData(null);
+    return () => {
+      setData(null);
+      setLoading(true);
+      setError(null);
+    };
   }, [url, params]);
-
-  // useEffect(() => {
-  //   setLoading(true);
-  //   setData(null);
-  //   setError(null);
-
-  //   getMoviesData(url)
-  //     .then((res) => {
-  //       setLoading(false);
-  //       setData(res);
-  //     })
-  //     .catch(() => {
-  //       setLoading(false);
-  //       setError("Something went wrong!");
-  //     }).finally(() => setLoading(false));
-  // }, [url]);
 
   return { data, loading, error };
 };

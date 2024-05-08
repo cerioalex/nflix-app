@@ -25,12 +25,17 @@ code {
   opacity: 0.8;
 }
 
-.title {
-  font-size: 20px;
+.title-container {
+  align-self: center;
+}
+
+.title-name {
+  font-size: 50px;
   color: #e50914;
   font-family: "Bebas Neue", sans-serif;
   font-weight: 400;
-  align-self: center;
+  align-content: center;
+  text-decoration: none;
 }
 
 .nav-links {
@@ -41,8 +46,7 @@ code {
 }
 
 .nav-item {
-  padding: 0px 16px;
-  margin: 0px 10px;
+  padding-left: 50px;
   height: 60px;
   align-content: center;
   font-family: "Montserrat", sans-serif;
@@ -181,15 +185,17 @@ code {
   margin-top: 26px;
   font-weight: bold;
   color: #fff;
-  width: 250px;
+  width: 230px;
   text-align: left;
   padding: 8px 0px;
+  word-wrap: break-word;
 }
 
 .movie-block-date {
   color: grey;
   font-size: 14px;
   margin-top: -15px;
+  text-align: left;
 }
 
 .scroll-button {

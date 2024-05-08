@@ -4,11 +4,19 @@
 
 .tvShow-container {
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 22px;
+  /* grid-template-columns: auto auto auto auto auto; */
+  margin-right: 10;
 }
 
 .tvShow-list {
   margin-bottom: 30px;
-  width: 250px;
+  width: 230px;
   text-align: center;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
 }
