@@ -16,7 +16,14 @@ const Explore = () => {
 
   if (loading) {
     return (
-      <div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
         <CircularProgress color="inherit" />
       </div>
     );

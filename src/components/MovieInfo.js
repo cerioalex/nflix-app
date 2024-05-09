@@ -14,7 +14,7 @@ const MovieInfo = ({ movie, crew }) => {
   }, [movie.genres]);
 
   if (!crew || !Array.isArray(crew)) {
-    return <div>No crew data available</div>;
+    return;
   }
 
   const getDirector = crew.find((c) => c.job === "Director");

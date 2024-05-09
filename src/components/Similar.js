@@ -26,11 +26,13 @@ const Similar = ({ id, mediaType }) => {
         <Typography variant="h5" gutterBottom>
           Similar{" "}
         </Typography>
-        <Scroll>
-          {similarMoviesData.results.map((movie) => (
-            <MovieBlock key={movie.id} mediaType={mediaType} movie={movie} />
-          ))}
-        </Scroll>
+        {!similarMoviesData ? null : (
+          <Scroll>
+            {similarMoviesData.results.map((movie) => (
+              <MovieBlock key={movie.id} mediaType={mediaType} movie={movie} />
+            ))}
+          </Scroll>
+        )}
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import MovieInfo from "../../components/MovieInfo";
 import MovieCast from "../../components/MovieCast";
 import Similar from "../../components/Similar";
 import Recommendations from "../../components/Recommendations";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Details = () => {
   const { mediaType, movieId } = useParams();
@@ -22,33 +23,29 @@ const Details = () => {
 
   const {
     data: castData,
-    // loading: castLoading,
+    loading: castLoading,
     // error: castError,
   } = useFetch(`${apiConfig.BASE_URL}/${mediaType}/${movieId}/credits`);
 
   if (movieDetailsLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (movieDetailsError) {
-    return <div>Error: {movieDetailsError.message}</div>;
-  }
-
-  if (!movieDetailsData) {
-    return <div>No data available....</div>;
-  }
-
-  if (!castData) {
-    return <div>No CAST data available....</div>;
+    return (
+      <div className="details-loading">
+        <CircularProgress />
+      </div>
+    );
   }
 
   return (
     <>
       <div className="details-container">
-        <MovieInfo movie={movieDetailsData} crew={castData.crew} />
-        <MovieCast casts={castData.cast} />
-        <Similar id={movieId} mediaType={mediaType} />
-        <Recommendations id={movieId} mediaType={mediaType} />
+        {!movieDetailsData || !castData || movieDetailsError ? null : (
+          <div>
+            <MovieInfo movie={movieDetailsData} crew={castData.crew} />
+            <MovieCast casts={castData.cast} />
+            <Similar id={movieId} mediaType={mediaType} />
+            <Recommendations id={movieId} mediaType={mediaType} />
+          </div>
+        )}
       </div>
     </>
   );
