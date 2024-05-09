@@ -3,13 +3,19 @@ import { useMovieContext } from "../../context/MovieContext";
 import MovieBlock from "../../components/MovieBlock";
 import Typography from "@mui/material/Typography";
 import Scroll from "../../components/Scroll";
+import LinearProgress from "@mui/material/LinearProgress";
 
 const TopRated = () => {
   const { topRatedMoviesData, topRatedMoviesLoading, topRatedMoviesError } =
     useMovieContext();
 
   if (topRatedMoviesLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <LinearProgress color="inherit" />
+        <h1>Loading Top Rated...</h1>
+      </div>
+    );
   }
 
   if (topRatedMoviesError) {

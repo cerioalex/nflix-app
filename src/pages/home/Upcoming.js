@@ -3,13 +3,19 @@ import { useMovieContext } from "../../context/MovieContext";
 import MovieBlock from "../../components/MovieBlock";
 import Typography from "@mui/material/Typography";
 import Scroll from "../../components/Scroll";
+import LinearProgress from "@mui/material/LinearProgress";
 
 const Upcoming = () => {
   const { upcomingMoviesData, upcomingMoviesLoading, upcomingMoviesError } =
     useMovieContext();
 
   if (upcomingMoviesLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <LinearProgress color="inherit" />
+        <h1>Loading Upcoming...</h1>
+      </div>
+    );
   }
 
   if (upcomingMoviesError) {

@@ -33,11 +33,13 @@ const Recommendations = ({ id, mediaType }) => {
         <Typography variant="h5" gutterBottom>
           Recommendations{" "}
         </Typography>
-        <Scroll>
-          {recommendationsMovieData.results.map((movie) => (
-            <MovieBlock key={movie.id} mediaType={mediaType} movie={movie} />
-          ))}
-        </Scroll>
+        {!recommendationsMovieData || !imagesMovieData ? null : (
+          <Scroll>
+            {recommendationsMovieData.results.map((movie) => (
+              <MovieBlock key={movie.id} mediaType={mediaType} movie={movie} />
+            ))}
+          </Scroll>
+        )}
       </div>
     </div>
   );
