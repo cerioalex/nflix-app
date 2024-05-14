@@ -7,62 +7,57 @@ import Select from "@mui/material/Select";
 import { apiConfig } from "../api/apiConfig";
 
 const SelectGenre = ({ mediaType }) => {
-  const { data, loading, error } = useFetch(`/genre/${mediaType}/list`);
+  // const { data, loading, error } = useFetch(`/genre/${mediaType}/list`);
   const [selectedGenre, setSelectedGenre] = useState("");
   const [genres, setGenres] = useState([]);
 
-  console.log("genresData");
-  console.log(data);
+  // console.log("genresData");
+  // console.log(data);
 
   const handleChange = (event) => {
     setSelectedGenre(event.target.value);
   };
 
   useEffect(() => {
-    // Optional: You can handle errors or loading states here if needed
-    if (error) {
-      console.error("Error fetching genres:", error);
-    }
-  }, [error]);
-
-  useEffect(() => {
-    const fetchGenres = async () => {
+    const fetchGenres = () => {
       try {
-        const response = await fetch(
-          "https://api.themoviedb.org/3/genre/movie/list",
-          {
-            method: "GET",
-            headers: {
-              accept: "application/json",
-              Authorization: apiConfig.ACCESS_TOKEN,
-            },
-          }
-        );
-        setGenres(response.data.genres);
+        const options = {
+          method: "GET",
+          headers: {
+            accept: "application/json",
+            Authorization: apiConfig.ACCESS_TOKEN,
+          },
+        };
+
+        fetch(
+          `https://api.themoviedb.org/3/genre/${mediaType}/list?language=en`,
+          options
+        )
+          .then((response) => response.json())
+          .then((response) => {
+            console.log(response.genres);
+            setGenres(response.genres);
+          })
+          .catch((err) => console.error(err));
       } catch (error) {
         console.error("Error fetching genres:", error);
       }
     };
 
     fetchGenres();
-  }, []);
+  }, [mediaType]);
 
-  if (loading) {
-    return <div>Loading genres...</div>;
-  }
+  // if (loading) {
+  //   return <div>Loading genres...</div>;
+  // }
 
-  if (error) {
-    return <div>Error fetching genres.</div>;
-  }
+  // if (error) {
+  //   return <div>Error fetching genres.</div>;
+  // }
 
   return (
     <>
-      <ul>
-        {genres.map((genre) => (
-          <li key={genre.id}>{genre.name}</li>
-        ))}
-      </ul>
-      {/* <FormControl
+      <FormControl
         variant="filled"
         sx={{
           marginBottom: 2,
@@ -72,25 +67,23 @@ const SelectGenre = ({ mediaType }) => {
           borderRadius: 10,
         }}
       >
-        <InputLabel id="demo-simple-select-filled-label">
-          Select Genre
-        </InputLabel>
+        <InputLabel id="select-genre-label">Select Genre</InputLabel>
         <Select
-          labelId="demo-simple-select-filled-label"
-          id="demo-simple-select-filled"
+          labelId="genre"
+          id="genre"
           value={selectedGenre}
           onChange={handleChange}
         >
           <MenuItem value="">
-            <em>None</em>
+            <em>---</em>
           </MenuItem>
-          {data.map((genre) => (
+          {genres.map((genre) => (
             <MenuItem key={genre.id} value={genre.id}>
               {genre.name}
             </MenuItem>
           ))}
         </Select>
-      </FormControl> */}
+      </FormControl>
     </>
   );
 };
