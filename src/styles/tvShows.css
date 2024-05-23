@@ -5,9 +5,9 @@
 .tvShow-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-gap: 22px;
+  grid-gap: 18.9px;
   /* grid-template-columns: auto auto auto auto auto; */
-  margin-right: 10;
+  margin-right: 8px;
 }
 
 .tvShow-list {
@@ -16,7 +16,39 @@
   text-align: center;
 }
 
-.row {
+.explore-row {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
+
+.explore-left {
+  padding: 12px 0px;
+}
+
+.react-select-container {
+  min-width: 250px;
+  color: white;
+}
+
+/* .react-select__control {
+  border-radius: 10px;
+  box-shadow: none; 
+}
+
+.react-select__menu {
+  background-color: #f0f0f0;
+}
+
+.react-select__option {
+  color: black;
+}
+
+.react-select__option--is-focused {
+  background-color: #d3d3d3;
+}
+
+.react-select__option--is-selected {
+  background-color: #4caf50;
+  color: white;
+} */
