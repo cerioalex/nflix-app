@@ -29,8 +29,8 @@ const MovieBlock = ({ mediaType, movie }) => {
             <img
               src={"https://www.usm.edu/images/image-not-available_1.jpg"}
               alt="#"
-              width={250}
-              height={250}
+              width={230}
+              height={400}
             />
           )}
           <div className="rating-container">
