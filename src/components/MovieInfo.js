@@ -32,12 +32,21 @@ const MovieInfo = ({ movie, crew }) => {
     <div className="info-container">
       <div className="info-row">
         <div className="info-col-1">
-          <img
-            src={apiConfig.imgW500(movie.poster_path)}
-            alt="#"
-            width={320}
-            height={500}
-          />
+          {movie.poster_path ? (
+            <img
+              src={apiConfig.imgW500(movie.poster_path)}
+              alt="#"
+              width={320}
+              height={500}
+            />
+          ) : (
+            <img
+              src={"https://www.usm.edu/images/image-not-available_1.jpg"}
+              alt="#"
+              width={320}
+              height={500}
+            />
+          )}
         </div>
         <div className="info-col-2">
           <p className="info-title">{movie.original_title}</p>
