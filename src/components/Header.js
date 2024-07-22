@@ -22,7 +22,7 @@ const Header = () => {
       </div>
       <ul className="nav-links">
         <li className="nav-item" onClick={() => navigationHandler("movie")}>
-          Home
+          Movies
         </li>
         <li className="nav-item" onClick={() => navigationHandler("tv")}>
           TV Shows
