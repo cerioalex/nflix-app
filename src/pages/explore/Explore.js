@@ -10,7 +10,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 const Explore = () => {
   const [data, setData] = useState([]);
   const [hasMore, setHasMore] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true);
+  const [scrollLoading, setScrollLoading] = useState(false);
   const [page, setPage] = useState(0);
   const { mediaType } = useParams();
 
@@ -28,31 +29,70 @@ const Explore = () => {
       : setSelectedMovieGenres(genreId);
   };
 
-  useEffect(() => {
-    const getMovies = async () => {
-      setIsLoading(true);
-      try {
-        let movies = [];
-        if (selectedGenre.length > 0) {
-          movies = await fetchMoviesByGenre(mediaType, selectedGenre, page);
-        } else {
-          movies = await fetchDiscover(mediaType, page);
-        }
+  const getMovies = async (isInitialLoad) => {
+    if (isInitialLoad) {
+      setInitialLoading(true);
+    } else {
+      setScrollLoading(true);
+    }
 
-        if (movies.length === 0) {
-          setHasMore(false);
-        } else {
-          setData((prevData) => [...prevData, ...movies]);
-        }
-      } catch (e) {
-        console.error(e);
-      } finally {
-        setIsLoading(false);
+    try {
+      let movies = [];
+      if (selectedGenre.length > 0) {
+        movies = await fetchMoviesByGenre(mediaType, selectedGenre, page);
+      } else {
+        movies = await fetchDiscover(mediaType, page);
       }
-    };
 
-    getMovies();
+      if (movies.length === 0) {
+        setHasMore(false);
+      } else {
+        setData((prevData) => [...prevData, ...movies]);
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setTimeout(() => {
+        if (isInitialLoad) {
+          setInitialLoading(false);
+        } else {
+          setScrollLoading(false);
+        }
+      }, 1000);
+    }
+  };
+
+  useEffect(() => {
+    getMovies(true);
   }, [mediaType, selectedGenre, page]);
+
+  // useEffect(() => {
+  //   const getMovies = async () => {
+  //     setLoading(true);
+  //     try {
+  //       let movies = [];
+  //       if (selectedGenre.length > 0) {
+  //         movies = await fetchMoviesByGenre(mediaType, selectedGenre, page);
+  //       } else {
+  //         movies = await fetchDiscover(mediaType, page);
+  //       }
+
+  //       if (movies.length === 0) {
+  //         setHasMore(false);
+  //       } else {
+  //         setData((prevData) => [...prevData, ...movies]);
+  //       }
+  //     } catch (e) {
+  //       console.error(e);
+  //     } finally {
+  //       setTimeout(() => {
+  //         setLoading(false);
+  //       }, [1000]);
+  //     }
+  //   };
+
+  //   getMovies();
+  // }, [mediaType, selectedGenre, page]);
 
   // Reset state whenever mediaType changes
   useEffect(() => {
@@ -110,39 +150,44 @@ const Explore = () => {
           />
         </div>
 
-        <div className="tvShow-container">
-          {data.length > 0 ? (
-            data.map((movie, index) => (
-              <div key={`${movie.id}-${index}`} className="tvShow-list">
-                <MovieBlock mediaType={mediaType} movie={movie} />
-              </div>
-            ))
-          ) : (
-            <Typography variant="h6" gutterBottom>
-              Sorry, results not found!
-            </Typography>
-          )}
-        </div>
+        {initialLoading ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100vh",
+            }}
+          >
+            <CircularProgress />
+          </div>
+        ) : (
+          <div className="tvShow-container">
+            {data.length > 0 ? (
+              data.map((movie, index) => (
+                <div key={`${movie.id}-${index}`} className="tvShow-list">
+                  <MovieBlock mediaType={mediaType} movie={movie} />
+                </div>
+              ))
+            ) : (
+              <Typography variant="h6" gutterBottom>
+                Sorry, no results found!
+              </Typography>
+            )}
+          </div>
+        )}
         {hasMore && (
           <div
             ref={elementRef}
             style={{
               flexShrink: 0,
               width: "100%",
-              display: "flex", // Use Flexbox for centering
-              justifyContent: "center", // Center horizontally
-              alignItems: "center", // Center vertically
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
-            <div
-              style={{
-                display: "flex", // Use Flexbox for centering inside the inner div
-                justifyContent: "center", // Center horizontally inside the inner div
-                alignItems: "center", // Center vertically inside the inner div
-              }}
-            >
-              <CircularProgress />
-            </div>
+            {scrollLoading && <CircularProgress />}
           </div>
         )}
       </div>

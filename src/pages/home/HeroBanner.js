@@ -6,6 +6,9 @@ const HeroBanner = () => {
   const { data, loading } = useFetch(`${apiConfig.BASE_URL}/movie/upcoming`);
   const [heroImage, setHeroImage] = useState("");
 
+  console.log("LOADING");
+  console.log(loading);
+
   useEffect(() => {
     const fetchHeroImage = () => {
       try {
@@ -31,7 +34,7 @@ const HeroBanner = () => {
       imageSource === "" ? (
         <div className="no-image"></div>
       ) : (
-        <img src={imageSource} alt="Hero Banner" className="hero-image" />
+        <img src={imageSource} alt="" className="hero-image" />
       )}
       <div className="hero-content">
         <h1>Welcome.</h1>
