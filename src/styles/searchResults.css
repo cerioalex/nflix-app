@@ -1,0 +1,21 @@
+.search-results-page {
+  padding: 30px 220px;
+}
+
+.page-title {
+  font-size: 25px;
+  color: white;
+}
+
+.search-result-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 18.9px;
+  margin-right: 8px;
+}
+
+.search-result-list {
+  margin-bottom: 30px;
+  width: 230px;
+  text-align: center;
+}

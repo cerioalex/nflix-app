@@ -29,6 +29,7 @@ const fetchMoviesByGenre = async (mediaType, genreIds, page) => {
   try {
     const genreString = genreIds.join(",");
     console.log(genreString);
+
     const response = await fetch(
       `${apiConfig.BASE_URL}/discover/${mediaType}?api_key=${
         apiConfig.API_KEY
@@ -62,4 +63,22 @@ const fetchDiscover = async (mediaType, page) => {
   }
 };
 
-export { fetchGenres, fetchMoviesByGenre, fetchDiscover };
+const fetchSearchQuery = async (query, page) => {
+  try {
+    const response = await fetch(
+      `${apiConfig.BASE_URL}/search/multi?query=${query}&page=${page + 1}`,
+      options
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch movies by search query");
+    }
+
+    const data = await response.json();
+    return data.results;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export { fetchGenres, fetchMoviesByGenre, fetchDiscover, fetchSearchQuery };
