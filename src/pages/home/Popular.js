@@ -4,7 +4,6 @@ import { useMovieContext } from "../../context/MovieContext";
 import MovieBlock from "../../components/MovieBlock";
 import Typography from "@mui/material/Typography";
 import Scroll from "../../components/Scroll";
-import LinearProgress from "@mui/material/LinearProgress";
 import Loading from "../../components/Loading";
 
 const Popular = () => {

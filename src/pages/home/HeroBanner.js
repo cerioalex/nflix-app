@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import useFetch from "../../hooks/useFetch";
 import { apiConfig } from "../../api/apiConfig";
+import { useNavigate } from "react-router-dom";
 
 const HeroBanner = () => {
   const { data, loading } = useFetch(`${apiConfig.BASE_URL}/movie/upcoming`);
   const [heroImage, setHeroImage] = useState("");
-
-  console.log("LOADING");
-  console.log(loading);
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchHeroImage = () => {
@@ -27,6 +27,12 @@ const HeroBanner = () => {
 
   const imageSource = heroImage ? `${apiConfig.imgOriginal(heroImage)}` : "";
 
+  const searchQueryHandler = (event) => {
+    if (event.key === "Enter" && query.length > 0) {
+      navigate(`/search/${query}`);
+    }
+  };
+
   return (
     <div className="hero-banner">
       {imageSource === null ||
@@ -37,8 +43,23 @@ const HeroBanner = () => {
         <img src={imageSource} alt="" className="hero-image" />
       )}
       <div className="hero-content">
-        <h1>Welcome.</h1>
-        <p>Millions of movies, TV shows and people to discover. Explore now.</p>
+        <span className="hero-title">Welcome.</span>
+        <span className="subtitle">
+          Millions of movies, TV shows and people to discover. Explore now.
+        </span>
+        <div className="search-input">
+          <input
+            type="text"
+            name="inputField"
+            placeholder="Search for a movie or tv show..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyUp={searchQueryHandler}
+          />
+          <button type="submit" onClick={searchQueryHandler}>
+            Search
+          </button>
+        </div>
       </div>
     </div>
   );
