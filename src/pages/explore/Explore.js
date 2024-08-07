@@ -6,14 +6,12 @@ import { fetchDiscover, fetchMoviesByGenre } from "../../utils/api";
 import MovieBlock from "../../components/MovieBlock";
 import GenreFilter from "../../components/GenreFilter";
 import CircularProgress from "@mui/material/CircularProgress";
-import ScrollObserver from "../../components/ScrollObserver";
 import ScrollObserverSample from "../../components/ScrollObserverSample";
+import ScrollObserver from "../../components/ScrollObserver";
 
 const Explore = () => {
   const [data, setData] = useState([]);
-  const [hasMore, setHasMore] = useState(true);
-  const [initialLoading, setInitialLoading] = useState(true);
-  const [scrollLoading, setScrollLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(0);
   const { mediaType } = useParams();
 
@@ -29,12 +27,8 @@ const Explore = () => {
       : setSelectedMovieGenres(genreId);
   };
 
-  const getMovies = async (isInitialLoad) => {
-    if (isInitialLoad) {
-      setInitialLoading(true);
-    } else {
-      setScrollLoading(true);
-    }
+  const getMovies = async () => {
+    setLoading(true);
 
     try {
       let movies = [];
@@ -44,34 +38,26 @@ const Explore = () => {
         movies = await fetchDiscover(mediaType, page);
       }
 
-      if (movies.length === 0) {
-        setHasMore(false);
+      if (page === 1) {
+        setData(movies);
       } else {
         setData((prevData) => [...prevData, ...movies]);
       }
     } catch (e) {
       console.error(e);
     } finally {
-      setTimeout(() => {
-        if (isInitialLoad) {
-          setInitialLoading(false);
-        } else {
-          setScrollLoading(false);
-        }
-      }, 1000);
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    getMovies(true);
-  }, [mediaType, selectedGenre, page]);
-
-  // Reset state whenever mediaType changes
-  useEffect(() => {
     setData([]);
     setPage(1);
-    setHasMore(true);
-  }, [selectedGenre, mediaType]);
+  }, [mediaType, selectedGenre]);
+
+  useEffect(() => {
+    getMovies();
+  }, [mediaType, selectedGenre, page]);
 
   const handleIntersect = () => {
     setPage((prevPage) => prevPage + 1);
@@ -106,7 +92,7 @@ const Explore = () => {
           />
         </div>
 
-        {initialLoading ? (
+        {loading && page === 1 ? (
           <div
             style={{
               display: "flex",
@@ -132,14 +118,20 @@ const Explore = () => {
             )}
           </div>
         )}
-        {hasMore && (
-          <ScrollObserver
-            onIntersect={handleIntersect}
-            hasMore={hasMore}
-            loading={scrollLoading}
-          />
+
+        {loading && page > 1 && (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100vh",
+            }}
+          >
+            <CircularProgress />
+          </div>
         )}
-        {/* <ScrollObserverSample /> */}
+        <ScrollObserver onIntersect={handleIntersect} />
       </div>
     </>
   );

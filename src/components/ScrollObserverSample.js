@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useCallback } from "react";
 
-const ScrollObserverSample = ({ onIntersect, options }) => {
+const ScrollObserverSample = ({ onIntersect }) => {
   const observerRef = useRef();
 
   const handleObserver = useCallback(
