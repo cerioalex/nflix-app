@@ -1,11 +1,13 @@
 import "../../styles/tvShows.css";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { Typography } from "@mui/material";
 import { fetchDiscover, fetchMoviesByGenre } from "../../utils/api";
 import MovieBlock from "../../components/MovieBlock";
 import GenreFilter from "../../components/GenreFilter";
 import CircularProgress from "@mui/material/CircularProgress";
+import ScrollObserver from "../../components/ScrollObserver";
+import ScrollObserverSample from "../../components/ScrollObserverSample";
 
 const Explore = () => {
   const [data, setData] = useState([]);
@@ -14,8 +16,6 @@ const Explore = () => {
   const [scrollLoading, setScrollLoading] = useState(false);
   const [page, setPage] = useState(0);
   const { mediaType } = useParams();
-
-  const elementRef = useRef(null);
 
   const [selectedMovieGenres, setSelectedMovieGenres] = useState([]);
   const [selectedTVGenres, setSelectedTVGenres] = useState([]);
@@ -66,34 +66,6 @@ const Explore = () => {
     getMovies(true);
   }, [mediaType, selectedGenre, page]);
 
-  // useEffect(() => {
-  //   const getMovies = async () => {
-  //     setLoading(true);
-  //     try {
-  //       let movies = [];
-  //       if (selectedGenre.length > 0) {
-  //         movies = await fetchMoviesByGenre(mediaType, selectedGenre, page);
-  //       } else {
-  //         movies = await fetchDiscover(mediaType, page);
-  //       }
-
-  //       if (movies.length === 0) {
-  //         setHasMore(false);
-  //       } else {
-  //         setData((prevData) => [...prevData, ...movies]);
-  //       }
-  //     } catch (e) {
-  //       console.error(e);
-  //     } finally {
-  //       setTimeout(() => {
-  //         setLoading(false);
-  //       }, [1000]);
-  //     }
-  //   };
-
-  //   getMovies();
-  // }, [mediaType, selectedGenre, page]);
-
   // Reset state whenever mediaType changes
   useEffect(() => {
     setData([]);
@@ -101,25 +73,9 @@ const Explore = () => {
     setHasMore(true);
   }, [selectedGenre, mediaType]);
 
-  // IntersectionObserver to trigger fetchMoreItems when the target is in view
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      const firstEntry = entries[0];
-      if (firstEntry.isIntersecting && hasMore) {
-        setPage((prevPage) => prevPage + 1);
-      }
-    });
-
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
-    }
-
-    return () => {
-      if (elementRef.current) {
-        observer.unobserve(elementRef.current);
-      }
-    };
-  }, [hasMore]);
+  const handleIntersect = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
 
   return (
     <>
@@ -177,19 +133,13 @@ const Explore = () => {
           </div>
         )}
         {hasMore && (
-          <div
-            ref={elementRef}
-            style={{
-              flexShrink: 0,
-              width: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            {scrollLoading && <CircularProgress />}
-          </div>
+          <ScrollObserver
+            onIntersect={handleIntersect}
+            hasMore={hasMore}
+            loading={scrollLoading}
+          />
         )}
+        {/* <ScrollObserverSample /> */}
       </div>
     </>
   );
