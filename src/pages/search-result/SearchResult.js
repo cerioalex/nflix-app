@@ -5,7 +5,7 @@ import { fetchSearchQuery } from "../../utils/api";
 import MovieBlock from "../../components/MovieBlock";
 import { Typography } from "@mui/material";
 import { CircularProgress } from "@mui/material";
-import ScrollObserverSample from "../../components/ScrollObserverSample";
+import ScrollObserver from "../../components/ScrollObserver";
 
 const SearchResult = () => {
   const [data, setData] = useState([]);
@@ -56,7 +56,6 @@ const SearchResult = () => {
           ))
         ) : (
           <Typography variant="h6" gutterBottom>
-            {" "}
             Sorry, no results found!
           </Typography>
         )}
@@ -74,7 +73,7 @@ const SearchResult = () => {
           <CircularProgress />
         </div>
       )}
-      <ScrollObserverSample onIntersect={handleIntersect} />
+      <ScrollObserver onIntersect={handleIntersect} />
     </div>
   );
 };

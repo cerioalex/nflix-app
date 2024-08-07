@@ -1,42 +1,34 @@
-import { CircularProgress } from "@mui/material";
 import React, { useEffect, useRef, useCallback } from "react";
 
-const ScrollObserver = ({ onIntersect, hasMore, loading }) => {
-  const elementRef = useRef(null);
+const ScrollObserver = ({ onIntersect }) => {
+  const observerRef = useRef();
+
+  const handleObserver = useCallback(
+    (entries) => {
+      const target = entries[0];
+      if (target.isIntersecting) {
+        onIntersect(); // setPage((prevPage) => prevPage + 1)
+      }
+    },
+    [onIntersect]
+  );
 
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      const firstEntry = entries[0];
-      if (firstEntry.isIntersecting && hasMore && !loading) {
-        onIntersect();
-      }
-    });
+    const option = {
+      root: null,
+      rootMargin: "20px",
+      threshold: 1.0,
+    };
 
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
-    }
+    const observer = new IntersectionObserver(handleObserver, option);
+    if (observerRef.current) observer.observe(observerRef.current);
 
     return () => {
-      if (elementRef.current) {
-        observer.unobserve(elementRef.current);
-      }
+      if (observerRef.current) observer.unobserve(observerRef.current);
     };
-  }, [hasMore, loading, onIntersect]);
+  }, [handleObserver]);
 
-  return (
-    <div
-      ref={elementRef}
-      style={{
-        flexShrink: 0,
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      {loading && <CircularProgress />}
-    </div>
-  );
+  return <div ref={observerRef} />;
 };
 
 export default ScrollObserver;
