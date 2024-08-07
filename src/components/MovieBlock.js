@@ -35,7 +35,14 @@ const MovieBlock = ({ mediaType, movie }) => {
           )}
           <div className="rating-container">
             <div className="circle-rating">
-              <CircularRating rating={movie.vote_average.toFixed(1)} />
+              <CircularRating
+                rating={
+                  // movie.vote_average.toFixed(1)
+                  movie.vote_average !== undefined
+                    ? movie.vote_average.toFixed(1)
+                    : "N/A"
+                }
+              />
             </div>
           </div>
           <p className="movie-block-title">{getTitle(movie)}</p>
